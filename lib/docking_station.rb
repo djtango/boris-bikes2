@@ -1,6 +1,8 @@
 module DockingStation
   DEFAULT_CAPACITY = 20
-  @dot_new = lambda do |capacity=DEFAULT_CAPACITY|
+  @@self = DockingStation
+  @@dot_class = :DockingStation
+  @@dot_new = lambda do |capacity=DEFAULT_CAPACITY|
     dot_capacity = DEFAULT_CAPACITY
     dot_bikes = []
 
@@ -8,13 +10,21 @@ module DockingStation
       dot_bikes.push(bike)
     end
 
+    dot_release_bike = lambda do 
+      dot_bikes.pop
+    end
+
     dispatch = lambda do |message|
 
       case message
+      when :dot_class?
+        @@self::dot_class?
       when :dot_dock
         dot_dock
       when :dot_bikes
         dot_bikes
+      when :dot_release_bike
+        dot_release_bike
       else
         raise "Undefined method exception"
       end
@@ -24,8 +34,11 @@ module DockingStation
     dispatch
   end
 
-  def dot_new
-    @dot_new
+  def DockingStation::dot_new
+    @@dot_new
+  end
+  def DockingStation::dot_class?
+    @@dot_class
   end
 end
 
