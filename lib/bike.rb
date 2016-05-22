@@ -3,6 +3,7 @@ module Bike
   @@self = Bike
   @@dot_new = lambda do ||
     dot_working = true
+
     dispatch = lambda do |message|
       case message
       when :dot_class?
@@ -16,9 +17,11 @@ module Bike
 
   dispatch
   end
+
   def Bike::dot_new
     @@dot_new
    end
+
   def Bike::dot_class?
     @@dot_class
   end
