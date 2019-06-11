@@ -1,5 +1,5 @@
 module Klass
-  def self.dot_new(klass_name, methods)
+  def self.dot_new(klass_name, methods, extends: [])
     klass_obj = {}
     undefined_method = lambda do |message|
       raise "Error: #{message} is not defined"
