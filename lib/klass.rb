@@ -53,6 +53,9 @@ module Klass
     new_body = lambda do |zelf, *args|
       # dup is technically prototype-based inheritance, but is this WAD for ruby where the class could be modified at run-time?
       # could call register_methods again...
+      undefined_method = lambda do |message|
+        raise "Error: #{message} is not defined"
+      end
       klass_instance = zelf.dup
       init_body[klass_instance, *args]
       dispatch = lambda do |message|
